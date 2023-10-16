@@ -1,6 +1,10 @@
-from models.entities.user import Usuario
-from app import app, db
-
+from models.entities.user import UserEntity
+from models.dtos.user import UserDTO
+from app import app
 
 class UserRepository:
-    pass
+    
+    @app.route("/", methods=["GET"])
+    def get_all():
+        query = UserEntity.query.all()
+        return  [UserDTO(**users.__dict__).dict() for users in query]
