@@ -20,3 +20,4 @@ class UserRepository:
         db.session.add(user)
         db.session.flush()
         db.session.refresh(user)
+        return user.id

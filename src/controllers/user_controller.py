@@ -23,15 +23,12 @@ class UserController:
             return f"Erro interno: {erro}", status.HTTP_500_INTERNAL_SERVER_ERROR
         
     def save():
-        try:
-            body = request.get_json()
-            user = UserEntity(
-                nome = body["nome"],
-                idade = body["idade"],
-                aceita_termos = 0
-            )
-            db.session.commit()
-            return UserRepository.save(user)
-        
-        except Exception as erro:
-            return f"Erro interno: {erro}", status.HTTP_500_INTERNAL_SERVER_ERROR
+        body = request.get_json()
+        user = UserEntity(
+            nome = body["nome"],
+            idade = body["idade"],
+            aceita_termos = body["aceita_termos"]
+        )
+        UserRepository.save(user)
+        db.session.commit()
+        return "200"
