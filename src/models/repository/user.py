@@ -21,3 +21,10 @@ class UserRepository:
         db.session.flush()
         db.session.refresh(user)
         return user.id
+
+    @staticmethod
+    def update(id, usuario):
+        db.session.query(UserEntity).filter_by(id=id).update({
+            UserEntity.nome: usuario.nome,
+            UserEntity.idade: usuario.idade,
+            UserEntity.aceita_termos: usuario.aceita_termos})

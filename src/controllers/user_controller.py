@@ -32,3 +32,15 @@ class UserController:
         UserRepository.save(user)
         db.session.commit()
         return "200"
+
+    def update(id):
+        body = request.get_json()
+        usuario = UserEntity(
+            nome=body["nome"],
+            idade=body["idade"],
+            aceita_termos=body["aceita_termos"]
+        )
+        UserRepository.update(id, usuario)
+        db.session.commit()
+        return f"O Usuário {usuario.nome} foi atualizado com sucesso!", status.HTTP_200_OK
+        
